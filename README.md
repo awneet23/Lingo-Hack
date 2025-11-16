@@ -41,21 +41,13 @@ Edit `public/locales/en.json` to add your translation keys:
 
 ```json
 {
-  "welcome": {
-    "en": "Welcome to my app!"
-  },
-  "nav": {
-    "home": {
-      "en": "Home"
-    },
-    "about": {
-      "en": "About"
-    }
-  }
+  "welcome": "Welcome to my app!",
+  "nav.home": "Home",
+  "nav.about": "About"
 }
 ```
 
-Note: The Lingo.dev json-dictionary format stores all languages in one file. Each key contains an object with language codes.
+Note: Each language has its own file with simple key-value pairs. Use dot notation for nested keys (e.g., `"nav.home"`).
 
 ### 4. Sync Translations
 
@@ -67,18 +59,36 @@ npx react-lingo sync
 
 This uses AI to translate your English keys into the target languages specified in `i18n.json` (default: Spanish, French, German).
 
-After running, your `en.json` will be updated with translations:
+After running, you'll have separate files for each language:
 
+**`public/locales/en.json`:**
 ```json
 {
-  "welcome": {
-    "en": "Welcome to my app!",
-    "es": "¡Bienvenido a mi aplicación!",
-    "fr": "Bienvenue dans mon application!",
-    "de": "Willkommen in meiner App!"
-  }
+  "welcome": "Welcome to my app!",
+  "nav.home": "Home",
+  "nav.about": "About"
 }
 ```
+
+**`public/locales/es.json`:**
+```json
+{
+  "welcome": "¡Bienvenido a mi aplicación!",
+  "nav.home": "Inicio",
+  "nav.about": "Acerca de"
+}
+```
+
+**`public/locales/fr.json`:**
+```json
+{
+  "welcome": "Bienvenue dans mon application!",
+  "nav.home": "Accueil",
+  "nav.about": "À propos"
+}
+```
+
+And similarly for German (`de.json`) and any other target languages you configure.
 
 ### 5. Use in Your React App
 
@@ -252,20 +262,21 @@ See the [Lingo.dev documentation](https://lingo.dev/en/cli/fundamentals/i18n-jso
 ### Dev-Time (CLI)
 
 1. You run `npx react-lingo init` to set up the project
-2. You add English translation keys to `public/locales/en.json`
+2. You add English translation keys to `public/locales/en.json` as simple key-value pairs
 3. You run `npx react-lingo sync` which:
    - Reads your `i18n.json` configuration
-   - Finds new or changed translation keys
+   - Finds new or changed translation keys in your source file (`en.json`)
    - Sends them to an LLM (via Lingo.dev)
-   - Writes translated values back to your JSON files
+   - Creates separate translation files for each target language (e.g., `es.json`, `fr.json`, `de.json`)
+   - Each file contains the same keys with translated values
    - Creates an `i18n.lock` file to track changes
 
 ### Run-Time (React)
 
-1. `LingoProvider` loads the translation file for the current language
-2. It flattens the json-dictionary format into a simple key-value object
-3. The `t()` function looks up keys in this object
-4. When you change languages, it fetches and loads the new translation file
+1. `LingoProvider` dynamically fetches the translation file for the current language (e.g., `en.json`, `es.json`)
+2. It stores the simple key-value object in state
+3. The `t()` function looks up keys directly in this object
+4. When you change languages, it fetches and loads the new language's translation file
 5. Components re-render with the new translations
 
 ## Why react-lingo?

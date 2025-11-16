@@ -96,15 +96,9 @@ function init() {
   const enPath = path.join(localesDir, 'en.json');
   if (!fs.existsSync(enPath)) {
     const sampleTranslations = {
-      welcome: {
-        en: "Welcome to React Lingo!"
-      },
-      greeting: {
-        en: "Hello World"
-      },
-      description: {
-        en: "This is a simple i18n solution for React applications."
-      }
+      welcome: "Welcome to React Lingo!",
+      greeting: "Hello World",
+      description: "This is a simple i18n solution for React applications."
     };
     fs.writeFileSync(enPath, JSON.stringify(sampleTranslations, null, 2));
     console.log('Created sample file: public/locales/en.json');

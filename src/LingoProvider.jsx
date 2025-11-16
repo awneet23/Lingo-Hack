@@ -36,7 +36,7 @@ export function LingoProvider({
 
   /**
    * Load translations for a specific language
-   * Fetches the JSON file and extracts translations for the target language
+   * Fetches the JSON file for the specific language
    */
   const loadTranslations = useCallback(async (language) => {
     setIsLoading(true);
@@ -55,13 +55,10 @@ export function LingoProvider({
 
       const data = await response.json();
 
-      // Extract translations for the current language from the json-dictionary format
-      // The Lingo.dev json-dictionary format stores translations as:
-      // { "key": { "en": "English", "es": "Spanish" } }
-      // We need to flatten this to: { "key": "English" }
-      const flattenedTranslations = flattenTranslations(data, language);
-
-      setTranslations(flattenedTranslations);
+      // Each language file is a simple key-value object
+      // e.g., en.json: { "welcome": "Welcome!", "greeting": "Hello" }
+      // No flattening needed - use the data directly
+      setTranslations(data);
     } catch (err) {
       console.error('Error loading translations:', err);
       setError(err.message);
@@ -71,49 +68,6 @@ export function LingoProvider({
       setIsLoading(false);
     }
   }, [translationsPath]);
-
-  /**
-   * Flatten nested translation object and extract values for specific language
-   *
-   * Converts:
-   * {
-   *   "welcome": { "en": "Welcome", "es": "Bienvenido" },
-   *   "section": {
-   *     "title": { "en": "Title", "es": "Título" }
-   *   }
-   * }
-   *
-   * To (for language 'en'):
-   * {
-   *   "welcome": "Welcome",
-   *   "section.title": "Title"
-   * }
-   */
-  function flattenTranslations(obj, language, prefix = '') {
-    const result = {};
-
-    for (const key in obj) {
-      const value = obj[key];
-      const fullKey = prefix ? `${prefix}.${key}` : key;
-
-      // Check if this is a translation object (has language keys)
-      if (
-        typeof value === 'object' &&
-        value !== null &&
-        !Array.isArray(value)
-      ) {
-        // If it has the current language key, it's a translation leaf node
-        if (language in value) {
-          result[fullKey] = value[language];
-        } else {
-          // Otherwise, recursively flatten nested objects
-          Object.assign(result, flattenTranslations(value, language, fullKey));
-        }
-      }
-    }
-
-    return result;
-  }
 
   /**
    * Change the current language and load its translations
