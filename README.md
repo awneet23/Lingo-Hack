@@ -1,4 +1,6 @@
-# react-lingo
+# Lingo
+
+YouTube Video: https://www.youtube.com/watch?v=l7YOUuLzVvs
 
 A simple, elegant wrapper around the Lingo.dev CLI to make i18n in React "just work."
 
@@ -38,6 +40,7 @@ npm install --save-dev vite @vitejs/plugin-react react react-dom
 ```
 
 **Note:**
+
 - `lingo.dev` must be installed locally for the CLI to work
 - Vite and React dependencies are needed to run the demo (`npm run dev`)
 
@@ -50,6 +53,7 @@ node cli/index.js init
 ```
 
 This will:
+
 - Initialize Lingo.dev in your project
 - Create a `public/locales/` directory
 - Generate an `i18n.json` configuration file with React-friendly defaults
@@ -88,6 +92,7 @@ This uses AI to translate your English keys into the target languages specified 
 After running, you'll have separate files for each language:
 
 **`public/locales/en.json`:**
+
 ```json
 {
   "welcome": "Welcome to my app!",
@@ -97,6 +102,7 @@ After running, you'll have separate files for each language:
 ```
 
 **`public/locales/es.json`:**
+
 ```json
 {
   "welcome": "¡Bienvenido a mi aplicación!",
@@ -106,6 +112,7 @@ After running, you'll have separate files for each language:
 ```
 
 **`public/locales/fr.json`:**
+
 ```json
 {
   "welcome": "Bienvenue dans mon application!",
@@ -122,13 +129,13 @@ Wrap your app with `LingoProvider`:
 
 ```jsx
 // App.jsx
-import { LingoProvider } from 'react-lingo';
+import { LingoProvider } from "react-lingo";
 
 function App() {
   return (
     <LingoProvider
       defaultLanguage="en"
-      supportedLanguages={['en', 'es', 'fr', 'de']}
+      supportedLanguages={["en", "es", "fr", "de"]}
       translationsPath="/locales"
     >
       <YourApp />
@@ -140,17 +147,17 @@ function App() {
 Use the `useTranslation()` hook in your components:
 
 ```jsx
-import { useTranslation } from 'react-lingo';
+import { useTranslation } from "react-lingo";
 
 function Home() {
   const { t, changeLanguage, currentLanguage } = useTranslation();
 
   return (
     <div>
-      <h1>{t('welcome')}</h1>
+      <h1>{t("welcome")}</h1>
       <nav>
-        <a href="/">{t('nav.home')}</a>
-        <a href="/about">{t('nav.about')}</a>
+        <a href="/">{t("nav.home")}</a>
+        <a href="/about">{t("nav.about")}</a>
       </nav>
 
       <select
@@ -170,7 +177,7 @@ function Home() {
 Or use the declarative `<Translate>` component:
 
 ```jsx
-import { Translate } from 'react-lingo';
+import { Translate } from "react-lingo";
 
 function Header() {
   return (
@@ -224,16 +231,18 @@ Perfect for hackathon demos, presentations, or showcasing the library's capabili
 The context provider that manages language state and translation loading.
 
 **Props:**
+
 - `children` (ReactNode) - Your app components
 - `defaultLanguage` (string) - Initial language code (default: `'en'`)
 - `translationsPath` (string) - Path to translation files (default: `'/locales'`)
 - `supportedLanguages` (string[]) - Array of supported language codes
 
 **Example:**
+
 ```jsx
 <LingoProvider
   defaultLanguage="en"
-  supportedLanguages={['en', 'es', 'fr']}
+  supportedLanguages={["en", "es", "fr"]}
   translationsPath="/locales"
 >
   <App />
@@ -245,6 +254,7 @@ The context provider that manages language state and translation loading.
 A React hook that provides translation functionality.
 
 **Returns:**
+
 - `t(key, options)` - Function to translate a key
 - `changeLanguage(lang)` - Function to change the current language
 - `currentLanguage` - The current language code
@@ -252,20 +262,21 @@ A React hook that provides translation functionality.
 - `error` - Error message if loading failed
 
 **Example:**
+
 ```jsx
 const { t, changeLanguage, currentLanguage, isLoading } = useTranslation();
 
 // Basic usage
-t('welcome') // "Welcome to my app!"
+t("welcome"); // "Welcome to my app!"
 
 // Nested keys
-t('nav.home') // "Home"
+t("nav.home"); // "Home"
 
 // With fallback
-t('missing.key', { fallback: 'Default text' })
+t("missing.key", { fallback: "Default text" });
 
 // With variable interpolation
-t('greeting', { vars: { name: 'John' } }) // "Hello, {{name}}!" → "Hello, John!"
+t("greeting", { vars: { name: "John" } }); // "Hello, {{name}}!" → "Hello, John!"
 ```
 
 ### `<Translate>`
@@ -273,6 +284,7 @@ t('greeting', { vars: { name: 'John' } }) // "Hello, {{name}}!" → "Hello, John
 A declarative component for rendering translated text.
 
 **Props:**
+
 - `children` (string) - The translation key
 - `vars` (object) - Variables for interpolation
 - `fallback` (string) - Custom fallback text
@@ -280,6 +292,7 @@ A declarative component for rendering translated text.
 - `...restProps` - Additional props passed to the rendered element
 
 **Example:**
+
 ```jsx
 <Translate>welcome</Translate>
 
