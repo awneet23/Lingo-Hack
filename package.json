@@ -1,0 +1,46 @@
+{
+  "name": "react-lingo",
+  "version": "1.0.0",
+  "description": "A simple, elegant wrapper around Lingo.dev CLI to make i18n in React just work",
+  "main": "src/index.js",
+  "bin": {
+    "react-lingo": "./cli/index.js"
+  },
+  "scripts": {
+    "init": "node cli/index.js init",
+    "sync": "node cli/index.js sync"
+  },
+  "keywords": [
+    "react",
+    "i18n",
+    "internationalization",
+    "lingo",
+    "translation",
+    "localization"
+  ],
+  "author": "",
+  "license": "MIT",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/yourusername/react-lingo.git"
+  },
+  "bugs": {
+    "url": "https://github.com/yourusername/react-lingo/issues"
+  },
+  "homepage": "https://github.com/yourusername/react-lingo#readme",
+  "peerDependencies": {
+    "react": "^16.8.0 || ^17.0.0 || ^18.0.0"
+  },
+  "devDependencies": {
+    "react": "^18.0.0"
+  },
+  "dependencies": {},
+  "files": [
+    "cli",
+    "src",
+    "README.md"
+  ],
+  "engines": {
+    "node": ">=14.0.0"
+  }
+}

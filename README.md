@@ -1,0 +1,287 @@
+# react-lingo
+
+A simple, elegant wrapper around the Lingo.dev CLI to make i18n in React "just work."
+
+react-lingo combines the power of AI-driven translations from Lingo.dev with a minimal React runtime, giving you internationalization with almost zero configuration.
+
+## Features
+
+- AI-powered translations via Lingo.dev CLI
+- Simple React Context API for managing languages
+- Declarative `<Translate>` component
+- Flexible `useTranslation()` hook
+- Automatic translation file loading
+- Zero-config setup with sensible defaults
+
+## Quick Start
+
+### 1. Installation
+
+```bash
+npm install react-lingo
+```
+
+### 2. Initialize Lingo.dev
+
+Run the init command to set up your project:
+
+```bash
+npx react-lingo init
+```
+
+This will:
+- Initialize Lingo.dev in your project
+- Create a `public/locales/` directory
+- Generate an `i18n.json` configuration file with React-friendly defaults
+- Create a sample `en.json` file with example translations
+
+### 3. Add Translation Keys
+
+Edit `public/locales/en.json` to add your translation keys:
+
+```json
+{
+  "welcome": {
+    "en": "Welcome to my app!"
+  },
+  "nav": {
+    "home": {
+      "en": "Home"
+    },
+    "about": {
+      "en": "About"
+    }
+  }
+}
+```
+
+Note: The Lingo.dev json-dictionary format stores all languages in one file. Each key contains an object with language codes.
+
+### 4. Sync Translations
+
+Run the sync command to generate translations for all target languages:
+
+```bash
+npx react-lingo sync
+```
+
+This uses AI to translate your English keys into the target languages specified in `i18n.json` (default: Spanish, French, German).
+
+After running, your `en.json` will be updated with translations:
+
+```json
+{
+  "welcome": {
+    "en": "Welcome to my app!",
+    "es": "¡Bienvenido a mi aplicación!",
+    "fr": "Bienvenue dans mon application!",
+    "de": "Willkommen in meiner App!"
+  }
+}
+```
+
+### 5. Use in Your React App
+
+Wrap your app with `LingoProvider`:
+
+```jsx
+// App.jsx
+import { LingoProvider } from 'react-lingo';
+
+function App() {
+  return (
+    <LingoProvider
+      defaultLanguage="en"
+      supportedLanguages={['en', 'es', 'fr', 'de']}
+      translationsPath="/locales"
+    >
+      <YourApp />
+    </LingoProvider>
+  );
+}
+```
+
+Use the `useTranslation()` hook in your components:
+
+```jsx
+import { useTranslation } from 'react-lingo';
+
+function Home() {
+  const { t, changeLanguage, currentLanguage } = useTranslation();
+
+  return (
+    <div>
+      <h1>{t('welcome')}</h1>
+      <nav>
+        <a href="/">{t('nav.home')}</a>
+        <a href="/about">{t('nav.about')}</a>
+      </nav>
+
+      <select
+        value={currentLanguage}
+        onChange={(e) => changeLanguage(e.target.value)}
+      >
+        <option value="en">English</option>
+        <option value="es">Español</option>
+        <option value="fr">Français</option>
+        <option value="de">Deutsch</option>
+      </select>
+    </div>
+  );
+}
+```
+
+Or use the declarative `<Translate>` component:
+
+```jsx
+import { Translate } from 'react-lingo';
+
+function Header() {
+  return (
+    <header>
+      <Translate as="h1">welcome</Translate>
+      <Translate as="p">nav.home</Translate>
+    </header>
+  );
+}
+```
+
+## API Reference
+
+### `<LingoProvider>`
+
+The context provider that manages language state and translation loading.
+
+**Props:**
+- `children` (ReactNode) - Your app components
+- `defaultLanguage` (string) - Initial language code (default: `'en'`)
+- `translationsPath` (string) - Path to translation files (default: `'/locales'`)
+- `supportedLanguages` (string[]) - Array of supported language codes
+
+**Example:**
+```jsx
+<LingoProvider
+  defaultLanguage="en"
+  supportedLanguages={['en', 'es', 'fr']}
+  translationsPath="/locales"
+>
+  <App />
+</LingoProvider>
+```
+
+### `useTranslation()`
+
+A React hook that provides translation functionality.
+
+**Returns:**
+- `t(key, options)` - Function to translate a key
+- `changeLanguage(lang)` - Function to change the current language
+- `currentLanguage` - The current language code
+- `isLoading` - Boolean indicating if translations are loading
+- `error` - Error message if loading failed
+
+**Example:**
+```jsx
+const { t, changeLanguage, currentLanguage, isLoading } = useTranslation();
+
+// Basic usage
+t('welcome') // "Welcome to my app!"
+
+// Nested keys
+t('nav.home') // "Home"
+
+// With fallback
+t('missing.key', { fallback: 'Default text' })
+
+// With variable interpolation
+t('greeting', { vars: { name: 'John' } }) // "Hello, {{name}}!" → "Hello, John!"
+```
+
+### `<Translate>`
+
+A declarative component for rendering translated text.
+
+**Props:**
+- `children` (string) - The translation key
+- `vars` (object) - Variables for interpolation
+- `fallback` (string) - Custom fallback text
+- `as` (string | Component) - HTML element to render as (default: `'span'`)
+- `...restProps` - Additional props passed to the rendered element
+
+**Example:**
+```jsx
+<Translate>welcome</Translate>
+
+<Translate as="h1" className="title">welcome</Translate>
+
+<Translate vars={{ name: 'John' }}>greeting</Translate>
+
+<Translate fallback="Welcome!">missing.key</Translate>
+```
+
+## CLI Commands
+
+### `npx react-lingo init`
+
+Initialize Lingo.dev in your project with React-friendly configuration.
+
+### `npx react-lingo sync`
+
+Synchronize and translate your translation files using AI.
+
+## Workflow
+
+1. **Add keys** - Add new translation keys to `public/locales/en.json`
+2. **Sync** - Run `npx react-lingo sync` to generate translations
+3. **Use** - Use the `t()` function or `<Translate>` component in your app
+4. **Repeat** - Add more keys and sync again as needed
+
+## Configuration
+
+The `i18n.json` file controls the translation process. You can customize:
+
+- **Source language** - The language you write translations in
+- **Target languages** - Languages to translate into
+- **File paths** - Where translation files are stored
+- **LLM provider** - Which AI service to use (Lingo.dev, OpenAI, Anthropic, etc.)
+
+See the [Lingo.dev documentation](https://lingo.dev/en/cli/fundamentals/i18n-json-config) for full configuration options.
+
+## How It Works
+
+### Dev-Time (CLI)
+
+1. You run `npx react-lingo init` to set up the project
+2. You add English translation keys to `public/locales/en.json`
+3. You run `npx react-lingo sync` which:
+   - Reads your `i18n.json` configuration
+   - Finds new or changed translation keys
+   - Sends them to an LLM (via Lingo.dev)
+   - Writes translated values back to your JSON files
+   - Creates an `i18n.lock` file to track changes
+
+### Run-Time (React)
+
+1. `LingoProvider` loads the translation file for the current language
+2. It flattens the json-dictionary format into a simple key-value object
+3. The `t()` function looks up keys in this object
+4. When you change languages, it fetches and loads the new translation file
+5. Components re-render with the new translations
+
+## Why react-lingo?
+
+- **AI-Powered** - Uses LLMs to generate high-quality translations automatically
+- **Simple** - Minimal API surface, easy to learn
+- **Flexible** - Works with hooks or components, your choice
+- **Dev-Friendly** - Sensible defaults, clear error messages
+- **Zero Config** - Works out of the box for most React apps
+
+## License
+
+MIT
+
+## Links
+
+- [Lingo.dev CLI Documentation](https://lingo.dev/en/cli)
+- [GitHub Repository](#)
+- [NPM Package](#)

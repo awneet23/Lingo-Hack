@@ -1,0 +1,48 @@
+{
+  "welcome": {
+    "en": "Welcome to React Lingo!",
+    "es": "¡Bienvenido a React Lingo!",
+    "fr": "Bienvenue sur React Lingo!",
+    "de": "Willkommen bei React Lingo!"
+  },
+  "description": {
+    "en": "This is a simple i18n solution for React applications powered by AI.",
+    "es": "Esta es una solución i18n simple para aplicaciones React impulsada por IA.",
+    "fr": "Il s'agit d'une solution i18n simple pour les applications React alimentée par l'IA.",
+    "de": "Dies ist eine einfache i18n-Lösung für React-Anwendungen, die von KI unterstützt wird."
+  },
+  "nav": {
+    "home": {
+      "en": "Home",
+      "es": "Inicio",
+      "fr": "Accueil",
+      "de": "Startseite"
+    },
+    "about": {
+      "en": "About",
+      "es": "Acerca de",
+      "fr": "À propos",
+      "de": "Über uns"
+    },
+    "contact": {
+      "en": "Contact",
+      "es": "Contacto",
+      "fr": "Contact",
+      "de": "Kontakt"
+    }
+  },
+  "footer": {
+    "copyright": {
+      "en": "© 2024 React Lingo. All rights reserved.",
+      "es": "© 2024 React Lingo. Todos los derechos reservados.",
+      "fr": "© 2024 React Lingo. Tous droits réservés.",
+      "de": "© 2024 React Lingo. Alle Rechte vorbehalten."
+    },
+    "rights": {
+      "en": "All rights reserved.",
+      "es": "Todos los derechos reservados.",
+      "fr": "Tous droits réservés.",
+      "de": "Alle Rechte vorbehalten."
+    }
+  }
+}

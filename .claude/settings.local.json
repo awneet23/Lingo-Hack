@@ -1,0 +1,10 @@
+{
+  "permissions": {
+    "allow": [
+      "WebFetch(domain:lingo.dev)",
+      "WebSearch"
+    ],
+    "deny": [],
+    "ask": []
+  }
+}
