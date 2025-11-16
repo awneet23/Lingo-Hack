@@ -4,14 +4,28 @@ A simple, elegant wrapper around the Lingo.dev CLI to make i18n in React "just w
 
 react-lingo combines the power of AI-driven translations from Lingo.dev with a minimal React runtime, giving you internationalization with almost zero configuration.
 
+## 🚀 Quick Demo
+
+Want to see it in action immediately? Run:
+
+```bash
+npm install
+npm run dev
+```
+
+Then open your browser to see the stunning demo with animated gradients, glassmorphism effects, and live language switching!
+
 ## Features
 
-- AI-powered translations via Lingo.dev CLI
-- Simple React Context API for managing languages
-- Declarative `<Translate>` component
-- Flexible `useTranslation()` hook
-- Automatic translation file loading
-- Zero-config setup with sensible defaults
+- 🤖 **AI-powered translations** via Lingo.dev CLI
+- 🎨 **Modern, stunning UI** with animated gradients and glassmorphism
+- 🌍 **Simple React Context API** for managing languages
+- 📦 **Declarative `<Translate>` component**
+- 🎣 **Flexible `useTranslation()` hook**
+- ⚡ **Automatic translation file loading**
+- 🚀 **Zero-config setup** with sensible defaults
+- 💫 **Beautiful animations** and smooth transitions
+- 📱 **Fully responsive** design
 
 ## Quick Start
 
@@ -19,14 +33,20 @@ react-lingo combines the power of AI-driven translations from Lingo.dev with a m
 
 ```bash
 npm install react-lingo
+npm install lingo.dev
+npm install --save-dev vite @vitejs/plugin-react react react-dom
 ```
+
+**Note:**
+- `lingo.dev` must be installed locally for the CLI to work
+- Vite and React dependencies are needed to run the demo (`npm run dev`)
 
 ### 2. Initialize Lingo.dev
 
 Run the init command to set up your project:
 
 ```bash
-npx react-lingo init
+node cli/index.js init
 ```
 
 This will:
@@ -54,7 +74,13 @@ Note: Each language has its own file with simple key-value pairs. Use dot notati
 Run the sync command to generate translations for all target languages:
 
 ```bash
-npx react-lingo sync
+node cli/index.js sync
+```
+
+To force re-translation of all keys (bypass cache):
+
+```bash
+node cli/index.js sync --force
 ```
 
 This uses AI to translate your English keys into the target languages specified in `i18n.json` (default: Spanish, French, German).
@@ -156,6 +182,41 @@ function Header() {
 }
 ```
 
+## 🎬 Live Demo
+
+This project includes a beautiful, interactive demo showcasing the translation features!
+
+### Running the Demo
+
+```bash
+npm run dev
+```
+
+This will start a Vite development server at `http://localhost:5173` (or similar).
+
+### Demo Features
+
+The included demo application showcases:
+
+- ✨ **Stunning animated gradient background** with smooth color transitions
+- 🎨 **Glassmorphism design** with frosted glass effects
+- 🌐 **Interactive language switcher** for English, Spanish, French, and German
+- 💫 **Smooth animations** and transitions on all interactive elements
+- 🎯 **Premium button designs** with hover effects and shadows
+- 📱 **Fully responsive** layout that works on all screen sizes
+- 🎭 **Real-time translation switching** demonstrating the library's capabilities
+
+### Visual Design Highlights
+
+- **Animated gradient background** - A mesmerizing 5-color gradient that shifts smoothly
+- **Gradient text** - Eye-catching purple gradient on the main heading
+- **Pill-shaped buttons** - Modern, rounded buttons with smooth hover animations
+- **Glass card** - Semi-transparent container with backdrop blur for depth
+- **Shimmer effects** - Subtle shine animations on the primary call-to-action button
+- **Staggered fade-ins** - Content animates in sequentially for a polished appearance
+
+Perfect for hackathon demos, presentations, or showcasing the library's capabilities!
+
 ## API Reference
 
 ### `<LingoProvider>`
@@ -231,18 +292,26 @@ A declarative component for rendering translated text.
 
 ## CLI Commands
 
-### `npx react-lingo init`
+### `node cli/index.js init`
 
 Initialize Lingo.dev in your project with React-friendly configuration.
 
-### `npx react-lingo sync`
+### `node cli/index.js sync`
 
 Synchronize and translate your translation files using AI.
+
+### `node cli/index.js sync --force`
+
+Force re-translation of all keys, bypassing the cache.
+
+### `npm run dev`
+
+Start the Vite development server to run the demo application. Opens at `http://localhost:5173`.
 
 ## Workflow
 
 1. **Add keys** - Add new translation keys to `public/locales/en.json`
-2. **Sync** - Run `npx react-lingo sync` to generate translations
+2. **Sync** - Run `node cli/index.js sync` to generate translations
 3. **Use** - Use the `t()` function or `<Translate>` component in your app
 4. **Repeat** - Add more keys and sync again as needed
 
@@ -261,9 +330,9 @@ See the [Lingo.dev documentation](https://lingo.dev/en/cli/fundamentals/i18n-jso
 
 ### Dev-Time (CLI)
 
-1. You run `npx react-lingo init` to set up the project
+1. You run `node cli/index.js init` to set up the project
 2. You add English translation keys to `public/locales/en.json` as simple key-value pairs
-3. You run `npx react-lingo sync` which:
+3. You run `node cli/index.js sync` which:
    - Reads your `i18n.json` configuration
    - Finds new or changed translation keys in your source file (`en.json`)
    - Sends them to an LLM (via Lingo.dev)
@@ -281,11 +350,13 @@ See the [Lingo.dev documentation](https://lingo.dev/en/cli/fundamentals/i18n-jso
 
 ## Why react-lingo?
 
-- **AI-Powered** - Uses LLMs to generate high-quality translations automatically
-- **Simple** - Minimal API surface, easy to learn
-- **Flexible** - Works with hooks or components, your choice
-- **Dev-Friendly** - Sensible defaults, clear error messages
-- **Zero Config** - Works out of the box for most React apps
+- 🤖 **AI-Powered** - Uses LLMs to generate high-quality translations automatically
+- 🎨 **Beautiful Demo** - Stunning, modern UI with animated gradients and glassmorphism
+- 🎯 **Simple** - Minimal API surface, easy to learn
+- 🔧 **Flexible** - Works with hooks or components, your choice
+- 👨‍💻 **Dev-Friendly** - Sensible defaults, clear error messages
+- ⚡ **Zero Config** - Works out of the box for most React apps
+- 🎬 **Demo Ready** - Includes a gorgeous demo perfect for presentations and hackathons
 
 ## License
 

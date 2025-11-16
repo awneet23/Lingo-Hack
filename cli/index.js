@@ -16,6 +16,7 @@ const path = require('path');
 // Parse command line arguments
 const args = process.argv.slice(2);
 const command = args[0];
+const extraArgs = args.slice(1); // Capture any additional arguments (e.g., --force)
 
 /**
  * Execute a shell command and stream output to console
@@ -37,8 +38,8 @@ function init() {
 
   // Run the official Lingo.dev init command
   executeCommand(
-    'npx lingo.dev@latest init',
-    'Failed to initialize Lingo.dev. Please check your internet connection and try again.'
+    'node ./node_modules/lingo.dev/bin/cli.mjs init',
+    'Failed to initialize Lingo.dev. Please ensure lingo.dev is installed (npm install lingo.dev).'
   );
 
   console.log('\nCreating React-friendly configuration...\n');
@@ -113,13 +114,20 @@ function init() {
 
 /**
  * Synchronize and translate files using Lingo.dev
+ * @param {Array<string>} additionalArgs - Extra arguments to pass to lingo.dev run (e.g., ['--force'])
  */
-function sync() {
+function sync(additionalArgs = []) {
   console.log('Synchronizing translations with Lingo.dev...\n');
+
+  // Build the command with any additional arguments
+  const baseCommand = 'node ./node_modules/lingo.dev/bin/cli.mjs run';
+  const fullCommand = additionalArgs.length > 0
+    ? `${baseCommand} ${additionalArgs.join(' ')}`
+    : baseCommand;
 
   // Execute the Lingo.dev run command
   executeCommand(
-    'npx lingo.dev@latest run',
+    fullCommand,
     'Failed to sync translations. Please ensure i18n.json is configured correctly.'
   );
 
@@ -135,16 +143,20 @@ function help() {
 react-lingo - Simple i18n for React using Lingo.dev
 
 Usage:
-  npx react-lingo <command>
+  npx react-lingo <command> [options]
 
 Commands:
   init    Initialize Lingo.dev with React-friendly defaults
   sync    Synchronize and translate your translation files
   help    Display this help message
 
+Options:
+  --force    Force re-translation of all keys (bypasses cache)
+
 Examples:
   npx react-lingo init
   npx react-lingo sync
+  npx react-lingo sync --force
 
 For more information, visit: https://lingo.dev/en/cli
   `);
@@ -156,7 +168,7 @@ switch (command) {
     init();
     break;
   case 'sync':
-    sync();
+    sync(extraArgs); // Pass through any additional arguments like --force
     break;
   case 'help':
   case '--help':

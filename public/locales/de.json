@@ -1,0 +1,12 @@
+{
+  "welcome": "Willkommen bei React Lingo!",
+  "description": "Dies ist eine einfache i18n-Lösung für React-Anwendungen, unterstützt durch KI.",
+  "nav.home": "Startseite",
+  "nav.about": "Über uns",
+  "nav.contact": "Kontakt",
+  "footer.copyright": "© 2025 React Lingo. Alle Rechte vorbehalten.",
+  "homepage.title": "Willkommen bei der besten App aller Zeiten",
+  "homepage.subtitle": "Registrieren Sie sich, um loszulegen.",
+  "button.login": "Anmelden",
+  "button.signup": "Jetzt registrieren"
+}

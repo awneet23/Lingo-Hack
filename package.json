@@ -8,7 +8,8 @@
   },
   "scripts": {
     "init": "node cli/index.js init",
-    "sync": "node cli/index.js sync"
+    "sync": "node cli/index.js sync",
+    "dev": "vite"
   },
   "keywords": [
     "react",
@@ -32,9 +33,14 @@
     "react": "^16.8.0 || ^17.0.0 || ^18.0.0"
   },
   "devDependencies": {
-    "react": "^18.0.0"
+    "@vitejs/plugin-react": "^5.1.1",
+    "react": "^18.3.1",
+    "react-dom": "^18.3.1",
+    "vite": "^7.2.2"
   },
-  "dependencies": {},
+  "dependencies": {
+    "lingo.dev": "^0.115.0"
+  },
   "files": [
     "cli",
     "src",

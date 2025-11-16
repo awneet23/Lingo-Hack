@@ -1,0 +1,282 @@
+/* Import modern font from Google Fonts */
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap');
+
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+  font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif;
+}
+
+/* Animated gradient background */
+.App {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  min-height: 100vh;
+  background: linear-gradient(135deg, #667eea 0%, #764ba2 25%, #f093fb 50%, #4facfe 75%, #00f2fe 100%);
+  background-size: 400% 400%;
+  animation: gradientShift 15s ease infinite;
+  position: relative;
+  overflow: hidden;
+}
+
+/* Animated background gradient */
+@keyframes gradientShift {
+  0% {
+    background-position: 0% 50%;
+  }
+  50% {
+    background-position: 100% 50%;
+  }
+  100% {
+    background-position: 0% 50%;
+  }
+}
+
+/* Glassmorphism card with enhanced shadows */
+.container {
+  background: rgba(255, 255, 255, 0.95);
+  backdrop-filter: blur(20px);
+  border-radius: 24px;
+  box-shadow: 0 20px 60px rgba(0, 0, 0, 0.3),
+              0 0 0 1px rgba(255, 255, 255, 0.5) inset;
+  padding: 50px 60px;
+  width: 100%;
+  max-width: 650px;
+  text-align: center;
+  border: 1px solid rgba(255, 255, 255, 0.3);
+  animation: fadeInUp 0.8s ease-out;
+  position: relative;
+}
+
+@keyframes fadeInUp {
+  from {
+    opacity: 0;
+    transform: translateY(30px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+/* Header styling */
+header p {
+  font-size: 0.85rem;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 1.5px;
+  color: #667eea;
+  margin-bottom: 16px;
+}
+
+/* Language navigation with modern pills */
+.lang-nav {
+  display: flex;
+  justify-content: center;
+  gap: 12px;
+  margin-bottom: 40px;
+  flex-wrap: wrap;
+}
+
+.lang-nav button {
+  background: linear-gradient(135deg, #f5f7fa 0%, #c3cfe2 100%);
+  border: none;
+  border-radius: 50px;
+  padding: 12px 24px;
+  cursor: pointer;
+  font-weight: 600;
+  font-size: 0.9rem;
+  color: #4a5568;
+  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+  position: relative;
+  overflow: hidden;
+}
+
+.lang-nav button::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 0;
+  height: 100%;
+  background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+  transition: width 0.3s ease;
+  z-index: -1;
+}
+
+.lang-nav button:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 6px 20px rgba(102, 126, 234, 0.4);
+}
+
+.lang-nav button:hover::before {
+  width: 100%;
+}
+
+.lang-nav button:hover {
+  color: white;
+}
+
+.lang-nav button:disabled {
+  background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+  color: white;
+  cursor: default;
+  box-shadow: 0 8px 25px rgba(102, 126, 234, 0.5);
+  transform: translateY(-2px);
+}
+
+.lang-nav button:disabled::before {
+  width: 100%;
+}
+
+/* Main content with gradient text */
+main h1 {
+  font-size: 3rem;
+  font-weight: 800;
+  background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+  margin-bottom: 16px;
+  line-height: 1.2;
+  animation: fadeIn 1s ease-out 0.2s both;
+}
+
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
+}
+
+main p {
+  font-size: 1.15rem;
+  color: #4a5568;
+  line-height: 1.7;
+  margin-bottom: 16px;
+  font-weight: 500;
+  animation: fadeIn 1s ease-out 0.4s both;
+}
+
+main p:last-of-type {
+  margin-bottom: 24px;
+}
+
+/* Premium button styling */
+.buttons {
+  display: flex;
+  justify-content: center;
+  gap: 16px;
+  margin-top: 40px;
+  animation: fadeIn 1s ease-out 0.6s both;
+  flex-wrap: wrap;
+}
+
+.buttons button {
+  border: none;
+  border-radius: 50px;
+  padding: 16px 36px;
+  font-size: 1.05rem;
+  font-weight: 700;
+  cursor: pointer;
+  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+  position: relative;
+  overflow: hidden;
+  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+}
+
+.buttons button:nth-child(1) {
+  background: white;
+  color: #667eea;
+  border: 2px solid #667eea;
+}
+
+.buttons button:nth-child(1):hover {
+  background: #667eea;
+  color: white;
+  transform: translateY(-3px);
+  box-shadow: 0 8px 25px rgba(102, 126, 234, 0.4);
+}
+
+.buttons .primary {
+  background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+  color: white;
+  border: none;
+}
+
+.buttons .primary:hover {
+  transform: translateY(-3px) scale(1.05);
+  box-shadow: 0 12px 35px rgba(102, 126, 234, 0.5);
+}
+
+.buttons .primary::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: -100%;
+  width: 100%;
+  height: 100%;
+  background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.3), transparent);
+  transition: left 0.5s;
+}
+
+.buttons .primary:hover::before {
+  left: 100%;
+}
+
+/* Footer with subtle gradient border */
+footer {
+  margin-top: 50px;
+  padding-top: 24px;
+  border-top: 2px solid transparent;
+  background-image: linear-gradient(white, white),
+                    linear-gradient(135deg, #667eea, #764ba2);
+  background-origin: padding-box, border-box;
+  background-clip: padding-box, border-box;
+  animation: fadeIn 1s ease-out 0.8s both;
+}
+
+footer p {
+  font-size: 0.9rem;
+  color: #718096;
+  font-weight: 500;
+}
+
+/* Responsive design */
+@media (max-width: 768px) {
+  .container {
+    padding: 40px 30px;
+    margin: 20px;
+  }
+
+  main h1 {
+    font-size: 2.2rem;
+  }
+
+  main p {
+    font-size: 1rem;
+  }
+
+  .lang-nav {
+    gap: 8px;
+  }
+
+  .lang-nav button {
+    padding: 10px 18px;
+    font-size: 0.85rem;
+  }
+
+  .buttons {
+    flex-direction: column;
+    gap: 12px;
+  }
+
+  .buttons button {
+    width: 100%;
+  }
+}
